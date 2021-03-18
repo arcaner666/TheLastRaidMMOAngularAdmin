@@ -1,0 +1,11 @@
+<mat-toolbar color="primary" class="navbar" *ngIf="this.auth.isLoggedIn">
+  <div>
+    <h3>The Last Raid MMO</h3>
+  </div>
+  <div>
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link [routerLink]="['overview']">Overview</a>
+      <a mat-tab-link (click)="Logout()">Logout</a>
+    </nav>
+  </div>
+</mat-toolbar>

@@ -1,0 +1,40 @@
+.mat-toolbar {
+    background-color: rgb(95, 95, 95);
+}
+
+.mat-tab-link {
+    min-width: 50px;
+}
+
+.mat-tab-link:hover {
+    background-color: rgb(122, 122, 122);
+}
+
+
+.mat-tab-link:focus {
+    background-color: rgb(122, 122, 122);
+}
+
+.navbar {
+    justify-content: space-between;
+}
+
+a:link {
+    color: white;
+    text-decoration: none;
+}
+
+a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+a:active {
+    color: white;
+    text-decoration: none;
+}
