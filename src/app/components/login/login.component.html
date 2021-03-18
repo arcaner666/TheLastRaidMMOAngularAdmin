@@ -13,13 +13,13 @@
               <mat-form-field floatLabel="auto" appearance="outline" fxFill>
                 <mat-label>User Name</mat-label>
                 <input matInput type="text" id="username" name="username" #username="ngModel"
-                  [(ngModel)]="player.UserName" (keyup)="Reset()" required>
+                  [(ngModel)]="admin.UserName" (keyup)="Reset()" required>
                 <mat-hint align="end">{{result.info}}</mat-hint>
               </mat-form-field>
               <mat-form-field floatLabel="auto" appearance="outline" fxFill>
                 <mat-label>Password</mat-label>
                 <input matInput type="password" id="password" name="password" #password="ngModel"
-                  [(ngModel)]="player.Password_" (keyup)="Reset()" required>
+                  [(ngModel)]="admin.Password_" (keyup)="Reset()" required>
               </mat-form-field>
               <button mat-raised-button type="submit" [disabled]="LoginForm.invalid" fxFill>Login</button>
             </mat-card-content>

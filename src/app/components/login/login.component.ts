@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from './../../services/auth.service';
 import { Result } from 'src/app/models/Result';
-import { Player } from 'src/app/models/Player';
-import { SessionRecord } from './../../models/SessionRecord';
+import { Administrator } from './../../models/Administrator';
+import { AdminSessionRecord } from 'src/app/models/AdminSessionRecord';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +13,8 @@ import { SessionRecord } from './../../models/SessionRecord';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  player: Player = new Player();
-  sessionRecord: SessionRecord = new SessionRecord();
+  admin: Administrator = new Administrator();
+  adminSessionRecord: AdminSessionRecord = new AdminSessionRecord();
   result: Result = new Result();
 
   sub1: Subscription;
@@ -40,15 +40,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   Login() {
     this.result = new Result();
     var date: Date = new Date();
-    this.sub1 = this.auth.Login(this.player).subscribe((a: Player) => {
+    this.sub1 = this.auth.Login(this.admin).subscribe((a: Administrator) => {
       if (a != null) {
         console.log(a);
         localStorage.setItem("token", this.auth.GenerateToken(64));
-        this.sessionRecord.PlayerID = a.PlayerID;
-        this.sessionRecord.LoginTime = date.getTime().toString();
-        this.sessionRecord.LogoutTime = "";
-        this.sessionRecord.LoginData = "";
-        this.sub2 = this.auth.AddSessionRecord(this.sessionRecord).subscribe((b: Result) => {
+        this.adminSessionRecord.AdministratorID = a.AdministratorID;
+        this.adminSessionRecord.LoginTime = date.getTime().toString();
+        this.adminSessionRecord.LogoutTime = "";
+        this.adminSessionRecord.LoginData = "";
+        this.sub2 = this.auth.AddSessionRecord(this.adminSessionRecord).subscribe((b: Result) => {
           console.log(b);
           localStorage.setItem("sessionId", b.info);
           this.router.navigate(['overview']);
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.result.isDone = false;
         this.result.info = "Wrong username or password.";
         console.log(this.result.info);
-        this.player = new Player();
+        this.admin = new Administrator();
       }
     }, error => {
       this.result.isDone = false;

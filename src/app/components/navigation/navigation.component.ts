@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import { SessionRecord } from 'src/app/models/SessionRecord';
+import { AdminSessionRecord } from 'src/app/models/AdminSessionRecord';
 
 @Component({
   selector: 'app-navigation',
@@ -11,7 +11,7 @@ import { SessionRecord } from 'src/app/models/SessionRecord';
 })
 export class NavigationComponent implements OnInit, OnDestroy {
 
-  sessionRecord: SessionRecord = new SessionRecord();
+  adminSessionRecord: AdminSessionRecord = new AdminSessionRecord();
 
   sub1: Subscription;
   sub2: Subscription;
@@ -34,11 +34,11 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   Logout() {
-    this.sub1 = this.auth.GetSessionRecord(parseInt(localStorage.getItem("sessionId"))).subscribe((sr: SessionRecord) => {
+    this.sub1 = this.auth.GetSessionRecord(parseInt(localStorage.getItem("sessionId"))).subscribe((sr: AdminSessionRecord) => {
       var date: Date = new Date();
-      this.sessionRecord = sr;
-      this.sessionRecord.LogoutTime = date.getTime().toString();
-      this.sub2 = this.auth.UpdateSessionRecord(this.sessionRecord).subscribe(a => {
+      this.adminSessionRecord = sr;
+      this.adminSessionRecord.LogoutTime = date.getTime().toString();
+      this.sub2 = this.auth.UpdateSessionRecord(this.adminSessionRecord).subscribe(a => {
         console.log(a);
         localStorage.removeItem("sessionId");
         localStorage.removeItem("token");

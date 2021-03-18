@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Player } from '../models/Player';
-import { SessionRecord } from '../models/SessionRecord';
+import { Administrator } from './../models/Administrator';
+import { AdminSessionRecord } from '../models/AdminSessionRecord';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  public readonly apiUrl = "https://localhost:44342/api/";
+  public readonly apiUrl = "https://localhost:44342/api/admin/";
   public isLoggedIn: boolean = this.AuthControl();
 
   constructor(
@@ -28,28 +28,20 @@ export class AuthService {
     }
   }
 
-  Login(player: Player) {
-    return this.http.post(this.apiUrl + "login", player);
+  Login(admin: Administrator) {
+    return this.http.post(this.apiUrl + "login", admin);
   }
 
-  AddSessionRecord(sessionRecord: SessionRecord) {
-    return this.http.post(this.apiUrl + "addsessionrecord", sessionRecord);
+  AddSessionRecord(adminSessionRecord: AdminSessionRecord) {
+    return this.http.post(this.apiUrl + "addsessionrecord", adminSessionRecord);
   }
 
-  UpdateSessionRecord(sessionRecord: SessionRecord) {
-    return this.http.put(this.apiUrl + "updatesessionrecord/" + sessionRecord.SessionRecordID, sessionRecord);
+  UpdateSessionRecord(adminSessionRecord: AdminSessionRecord) {
+    return this.http.put(this.apiUrl + "updatesessionrecord/" + adminSessionRecord.AdminSessionRecordID, adminSessionRecord);
   }
 
   GetSessionRecord(sessionId: number) {
     return this.http.get(this.apiUrl + "getsessionrecord/" + sessionId);
-  }
-
-  CheckUserNameAvailability(username: string) {
-    return this.http.get(this.apiUrl + "checkusername/" + username);
-  }
-
-  Register(player: Player) {
-    return this.http.post(this.apiUrl + "register", player);
   }
 
   GenerateToken(s: number) {
