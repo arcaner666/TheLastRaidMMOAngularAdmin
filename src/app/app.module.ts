@@ -11,8 +11,10 @@ import { MaterialModule } from './modules/material/material.module';
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth.guard';
+import { MapService } from './services/map.service';
 
 import { LoginComponent } from './components/login/login.component';
+import { MapComponent } from './components/map/map.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { OverviewComponent } from './components/overview/overview.component';
 
@@ -20,6 +22,7 @@ import { OverviewComponent } from './components/overview/overview.component';
   declarations: [
     AppComponent,
     LoginComponent,
+    MapComponent,
     NavigationComponent,
     OverviewComponent
   ],
@@ -34,7 +37,8 @@ import { OverviewComponent } from './components/overview/overview.component';
   ],
   providers: [
     AuthGuard,
-    AuthService
+    AuthService,
+    MapService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

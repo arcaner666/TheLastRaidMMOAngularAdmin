@@ -1,0 +1,29 @@
+.bg-color1 {
+    background-color: rgb(95, 95, 95);
+}
+
+.btn-color1 {
+    background-color: rgb(144, 144, 144);
+}
+
+.container {
+    background-color: black;
+    padding-top: 20px;
+}
+
+.mat-card {
+    width: 50%;
+}
+
+.mat-card-header {
+    display: block;
+}
+
+.ml {
+    margin-left: 16px;
+}
+
+.mat-raised-button {
+    margin-top: 10px;
+    width: 150px;
+}

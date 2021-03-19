@@ -1,0 +1,28 @@
+<div class="container" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="20px" fxFill>
+  <mat-card class="bg-color1">
+    <mat-card-header>
+      <mat-card-title fxLayoutAlign="space-between">
+        <span>Harita</span>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <br>
+      <p class="ml">Girilen parametrelere göre harita üretir.</p>
+      <br>
+      <form #MapForm="ngForm" (ngSubmit)="CreateMap()">
+        <mat-form-field floatLabel="auto" appearance="outline" fxFill>
+          <mat-label>Bölge</mat-label>
+          <input matInput type="number" id="region1" name="region1" #region1="ngModel" [(ngModel)]="region"
+            (keyup)="Reset()" required>
+        </mat-form-field>
+        <mat-form-field floatLabel="auto" appearance="outline" fxFill>
+          <mat-label>Alan</mat-label>
+          <input matInput type="number" id="area1" name="area1" #area1="ngModel" [(ngModel)]="area" (keyup)="Reset()"
+            required>
+        </mat-form-field>
+        <button mat-raised-button type="submit" class="btn-color1" [disabled]="MapForm.invalid" fxFill>Üret</button>
+      </form>
+      <button mat-raised-button (click)="DeleteMap()" class="btn-color1" fxFill>Sil</button>
+    </mat-card-content>
+  </mat-card>
+</div>
