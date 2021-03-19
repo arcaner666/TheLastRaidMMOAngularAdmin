@@ -1,7 +1,31 @@
 <div class="container" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="20px" fxFill>
+  <mat-table [dataSource]="locations" class="mat-table">
+    <ng-container matColumnDef="LocationID">
+      <mat-header-cell *matHeaderCellDef> LocationID </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.LocationID}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="PlayerID">
+      <mat-header-cell *matHeaderCellDef> PlayerID </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.PlayerID}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="LocationName">
+      <mat-header-cell *matHeaderCellDef> LocationName </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.LocationName}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Region">
+      <mat-header-cell *matHeaderCellDef> Region </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Region}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Area">
+      <mat-header-cell *matHeaderCellDef> Area </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Area}} </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
   <mat-card class="bg-color1">
     <mat-card-header>
-      <mat-card-title fxLayoutAlign="space-between">
+      <mat-card-title>
         <span>Harita</span>
       </mat-card-title>
     </mat-card-header>
@@ -9,7 +33,7 @@
       <br>
       <p class="ml">Girilen parametrelere göre harita üretir.</p>
       <br>
-      <form #MapForm="ngForm" (ngSubmit)="CreateMap()">
+      <form #MapForm="ngForm" (ngSubmit)="CreateLocations()">
         <mat-form-field floatLabel="auto" appearance="outline" fxFill>
           <mat-label>Bölge</mat-label>
           <input matInput type="number" id="region1" name="region1" #region1="ngModel" [(ngModel)]="region"
@@ -22,7 +46,7 @@
         </mat-form-field>
         <button mat-raised-button type="submit" class="btn-color1" [disabled]="MapForm.invalid" fxFill>Üret</button>
       </form>
-      <button mat-raised-button (click)="DeleteMap()" class="btn-color1" fxFill>Sil</button>
+      <button mat-raised-button (click)="DeleteLocations()" class="btn-color1" fxFill>Sil</button>
     </mat-card-content>
   </mat-card>
 </div>

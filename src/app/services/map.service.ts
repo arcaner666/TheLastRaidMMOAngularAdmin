@@ -12,11 +12,15 @@ export class MapService {
     public http: HttpClient
   ) { }
 
-  CreateMap(region: number, area: number) {
-    return this.http.get(this.apiUrl + "createmap/" + region + "/" + area);
+  GetLocationsByRegion(region: number) {
+    return this.http.get(this.apiUrl + "getlocationsbyregion/" + region);
   }
 
-  DeleteMap() {
-    return this.http.get(this.apiUrl + "deletemap");
+  CreateLocations(region: number, area: number) {
+    return this.http.get(this.apiUrl + "createlocations/" + region + "/" + area);
+  }
+
+  DeleteLocations() {
+    return this.http.get(this.apiUrl + "deletelocations");
   }
 }

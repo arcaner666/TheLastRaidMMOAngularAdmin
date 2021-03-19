@@ -1,6 +1,7 @@
-import { MapService } from './../../services/map.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { MapService } from './../../services/map.service';
+import { Location } from './../../models/Location';
 import { Result } from './../../models/Result';
 
 @Component({
@@ -10,19 +11,26 @@ import { Result } from './../../models/Result';
 })
 export class MapComponent implements OnInit, OnDestroy {
 
+  locations: Location[];
+
   result: Result = new Result();
+
+  displayedColumns: string[] = ['LocationID', 'PlayerID', 'LocationName', 'Region', 'Area'];
 
   region: number;
   area: number;
+  selectedRegion: number = 1;
 
   sub1: Subscription;
   sub2: Subscription;
+  sub3: Subscription;
 
   constructor(
     public map: MapService
   ) { }
 
   ngOnInit() {
+    this.GetLocationsByRegion();
   }
 
   ngOnDestroy(): void {
@@ -32,10 +40,22 @@ export class MapComponent implements OnInit, OnDestroy {
     if (this.sub2) {
       this.sub2.unsubscribe();
     }
+    if (this.sub3) {
+      this.sub3.unsubscribe();
+    }
   }
 
-  CreateMap() {
-    this.sub1 = this.map.CreateMap(this.region, this.area).subscribe((a: Result) => {
+  GetLocationsByRegion() {
+    this.sub1 = this.map.GetLocationsByRegion(this.selectedRegion).subscribe((a: Location[]) => {
+      this.locations = a;
+      console.log(a);
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  CreateLocations() {
+    this.sub2 = this.map.CreateLocations(this.region, this.area).subscribe((a: Result) => {
       if (a.isDone) {
         console.log(a.info);
       }
@@ -47,8 +67,8 @@ export class MapComponent implements OnInit, OnDestroy {
     });
   }
 
-  DeleteMap() {
-    this.sub2 = this.map.DeleteMap().subscribe((a: Result) => {
+  DeleteLocations() {
+    this.sub3 = this.map.DeleteLocations().subscribe((a: Result) => {
       if (a.isDone) {
         console.log(a.info);
       }
