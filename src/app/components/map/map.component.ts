@@ -30,7 +30,7 @@ export class MapComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.GetLocationsByRegion();
+    this.GetLocationsByRegion(this.selectedRegion);
   }
 
   ngOnDestroy(): void {
@@ -45,8 +45,8 @@ export class MapComponent implements OnInit, OnDestroy {
     }
   }
 
-  GetLocationsByRegion() {
-    this.sub1 = this.map.GetLocationsByRegion(this.selectedRegion).subscribe((a: Location[]) => {
+  GetLocationsByRegion(region: number) {
+    this.sub1 = this.map.GetLocationsByRegion(region).subscribe((a: Location[]) => {
       this.locations = a;
       console.log(a);
     }, error => {
@@ -57,6 +57,7 @@ export class MapComponent implements OnInit, OnDestroy {
   CreateLocations() {
     this.sub2 = this.map.CreateLocations(this.region, this.area).subscribe((a: Result) => {
       if (a.isDone) {
+        this.GetLocationsByRegion(this.selectedRegion);
         console.log(a.info);
       }
       else {
@@ -70,6 +71,7 @@ export class MapComponent implements OnInit, OnDestroy {
   DeleteLocations() {
     this.sub3 = this.map.DeleteLocations().subscribe((a: Result) => {
       if (a.isDone) {
+        this.GetLocationsByRegion(this.selectedRegion);
         console.log(a.info);
       }
       else {

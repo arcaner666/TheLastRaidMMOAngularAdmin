@@ -1,4 +1,10 @@
 <div class="container" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="20px" fxFill>
+  <button mat-raised-button [disabled]="selectedRegion < 2">Önceki</button>
+  <mat-form-field floatLabel="auto" appearance="outline">
+    <mat-label>Region</mat-label>
+    <input matInput type="region1" id="region1" name="region1" #region1="ngModel" [(ngModel)]="selectedRegion" required>
+  </mat-form-field>
+  <button mat-raised-button [disabled]="selectedRegion < 2">Sonraki</button>
   <mat-table [dataSource]="locations" class="mat-table">
     <ng-container matColumnDef="LocationID">
       <mat-header-cell *matHeaderCellDef> LocationID </mat-header-cell>
@@ -31,7 +37,7 @@
     </mat-card-header>
     <mat-card-content>
       <br>
-      <p class="ml">Girilen parametrelere göre harita üretir.</p>
+      <p class="ml">Girilen parametrelere göre harita üretir veya siler.</p>
       <br>
       <form #MapForm="ngForm" (ngSubmit)="CreateLocations()">
         <mat-form-field floatLabel="auto" appearance="outline" fxFill>
