@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MapService {
 
-  public readonly apiUrl = "https://localhost:44342/api/admin/";
+  public readonly apiUrl = "https://localhost:44336/api/admin/";
 
   constructor(
     public http: HttpClient

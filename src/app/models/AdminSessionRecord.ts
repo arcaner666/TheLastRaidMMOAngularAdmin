@@ -1,6 +1,6 @@
 export class AdminSessionRecord {
-    AdminSessionRecordID: number;
-    AdministratorID: number;
+    AdminSessionRecordId: number;
+    AdministratorId: number;
     LoginTime: string;
     LogoutTime: string;
     LoginData: string;

@@ -8,7 +8,7 @@ import { AdminSessionRecord } from '../models/AdminSessionRecord';
 })
 export class AuthService {
 
-  public readonly apiUrl = "https://localhost:44342/api/admin/";
+  public readonly apiUrl = "https://localhost:44336/api/admin/";
   public isLoggedIn: boolean = this.AuthControl();
 
   constructor(
@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   UpdateSessionRecord(adminSessionRecord: AdminSessionRecord) {
-    return this.http.put(this.apiUrl + "updatesessionrecord/" + adminSessionRecord.AdminSessionRecordID, adminSessionRecord);
+    return this.http.put(this.apiUrl + "updatesessionrecord/" + adminSessionRecord.AdminSessionRecordId, adminSessionRecord);
   }
 
   GetSessionRecord(sessionId: number) {

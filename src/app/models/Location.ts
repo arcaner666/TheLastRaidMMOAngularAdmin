@@ -1,6 +1,6 @@
 export class Location {
-    LocationID: number;
-    PlayerID: number;
+    LocationId: number;
+    PlayerId: number;
     LocationName: string;
     Region: number;
     Area: number;

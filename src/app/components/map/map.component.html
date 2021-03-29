@@ -6,13 +6,13 @@
   </mat-form-field>
   <button mat-raised-button [disabled]="selectedRegion < 2">Sonraki</button>
   <mat-table [dataSource]="locations" class="mat-table">
-    <ng-container matColumnDef="LocationID">
-      <mat-header-cell *matHeaderCellDef> LocationID </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.LocationID}} </mat-cell>
+    <ng-container matColumnDef="LocationId">
+      <mat-header-cell *matHeaderCellDef> LocationId </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.LocationId}} </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="PlayerID">
-      <mat-header-cell *matHeaderCellDef> PlayerID </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.PlayerID}} </mat-cell>
+    <ng-container matColumnDef="PlayerId">
+      <mat-header-cell *matHeaderCellDef> PlayerId </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.PlayerId}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="LocationName">
       <mat-header-cell *matHeaderCellDef> LocationName </mat-header-cell>

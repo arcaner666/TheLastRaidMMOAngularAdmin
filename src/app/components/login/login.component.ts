@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       if (a != null) {
         console.log(a);
         localStorage.setItem("token", this.auth.GenerateToken(64));
-        this.adminSessionRecord.AdministratorID = a.AdministratorID;
+        this.adminSessionRecord.AdministratorId = a.AdministratorId;
         this.adminSessionRecord.LoginTime = date.getTime().toString();
         this.adminSessionRecord.LogoutTime = "";
         this.adminSessionRecord.LoginData = "";

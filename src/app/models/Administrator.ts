@@ -1,7 +1,7 @@
 export class Administrator {
-    AdministratorID: number;
+    AdministratorId: number;
     UserName: string;
-    Password_: string;
+    Password: string;
     Nickname: string;
     Email: string;
 }
