@@ -15,7 +15,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
   result: Result = new Result();
 
-  displayedColumns: string[] = ['LocationID', 'PlayerID', 'LocationName', 'Region', 'Area'];
+  displayedColumns: string[] = ['LocationId', 'PlayerId', 'LocationName', 'Region', 'Area'];
 
   region: number;
   area: number;
@@ -48,7 +48,6 @@ export class MapComponent implements OnInit, OnDestroy {
   GetLocationsByRegion(region: number) {
     this.sub1 = this.map.GetLocationsByRegion(region).subscribe((a: Location[]) => {
       this.locations = a;
-      console.log(a);
     }, error => {
       console.log(error);
     });
