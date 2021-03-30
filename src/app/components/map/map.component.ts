@@ -1,8 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MapService } from './../../services/map.service';
 import { Location } from './../../models/Location';
 import { Result } from './../../models/Result';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-map',
@@ -15,7 +17,8 @@ export class MapComponent implements OnInit, OnDestroy {
 
   result: Result = new Result();
 
-  displayedColumns: string[] = ['LocationId', 'PlayerId', 'LocationName', 'Region', 'Area'];
+  displayedColumns: string[] = ['LocationId', 'Region', 'Area', 'PlayerId', 'LocationName'];
+  dataSource = new MatTableDataSource<Location>();
 
   region: number;
   area: number;
@@ -25,6 +28,8 @@ export class MapComponent implements OnInit, OnDestroy {
   sub2: Subscription;
   sub3: Subscription;
 
+  @ViewChild(MatSort) sort: MatSort;
+
   constructor(
     public map: MapService
   ) { }
@@ -33,7 +38,7 @@ export class MapComponent implements OnInit, OnDestroy {
     this.GetLocationsByRegion(this.selectedRegion);
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     if (this.sub1) {
       this.sub1.unsubscribe();
     }
@@ -48,8 +53,8 @@ export class MapComponent implements OnInit, OnDestroy {
   GetLocationsByRegion(region: number) {
     this.sub1 = this.map.GetLocationsByRegion(region).subscribe((a: Location[]) => {
       this.locations = a;
-    }, error => {
-      console.log(error);
+      this.dataSource = new MatTableDataSource<Location>(this.locations);
+      this.dataSource.sort = this.sort;
     });
   }
 
@@ -62,8 +67,6 @@ export class MapComponent implements OnInit, OnDestroy {
       else {
         console.log(a.info);
       }
-    }, error => {
-      console.log(error);
     });
   }
 
@@ -76,9 +79,17 @@ export class MapComponent implements OnInit, OnDestroy {
       else {
         console.log(a.info);
       }
-    }, error => {
-      console.log(error);
     });
+  }
+
+  NextRegion() {
+    this.selectedRegion++;
+    this.GetLocationsByRegion(this.selectedRegion);
+  }
+
+  PreviousRegion() {
+    this.selectedRegion--;
+    this.GetLocationsByRegion(this.selectedRegion);
   }
 
   Reset() {

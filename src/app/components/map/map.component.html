@@ -1,34 +1,53 @@
 <div class="container" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="20px" fxFill>
-  <button mat-raised-button [disabled]="selectedRegion < 2">Önceki</button>
-  <mat-form-field floatLabel="auto" appearance="outline">
-    <mat-label>Region</mat-label>
-    <input matInput type="region1" id="region1" name="region1" #region1="ngModel" [(ngModel)]="selectedRegion" required>
-  </mat-form-field>
-  <button mat-raised-button [disabled]="selectedRegion < 2">Sonraki</button>
-  <mat-table [dataSource]="locations" class="mat-table">
-    <ng-container matColumnDef="LocationId">
-      <mat-header-cell *matHeaderCellDef> LocationId </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.LocationId}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="PlayerId">
-      <mat-header-cell *matHeaderCellDef> PlayerId </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.PlayerId}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="LocationName">
-      <mat-header-cell *matHeaderCellDef> LocationName </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.LocationName}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="Region">
-      <mat-header-cell *matHeaderCellDef> Region </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.Region}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="Area">
-      <mat-header-cell *matHeaderCellDef> Area </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.Area}} </mat-cell>
-    </ng-container>
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+  <mat-card class="bg-color1">
+    <mat-card-header>
+      <mat-card-title>
+
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <button mat-raised-button (click)="PreviousRegion()" [disabled]="selectedRegion < 2">Önceki</button>
+      <mat-form-field floatLabel="auto" appearance="outline">
+        <mat-label>Region</mat-label>
+        <input matInput type="region1" id="region1" name="region1" #region1="ngModel" [(ngModel)]="selectedRegion"
+          required>
+      </mat-form-field>
+      <button mat-raised-button (click)="NextRegion()" [disabled]="selectedRegion > 2">Sonraki</button>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="bg-color1">
+    <mat-card-header>
+      <mat-card-title>
+
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-table [dataSource]="dataSource" matSort class="mat-table">
+        <ng-container matColumnDef="LocationId">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> LocationId </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.LocationId}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="PlayerId">
+          <mat-header-cell *matHeaderCellDef> PlayerId </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.PlayerId}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="LocationName">
+          <mat-header-cell *matHeaderCellDef> LocationName </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.LocationName}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Region">
+          <mat-header-cell *matHeaderCellDef> Region </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Region}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Area">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Area </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Area}} </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </mat-card-content>
+  </mat-card>
   <mat-card class="bg-color1">
     <mat-card-header>
       <mat-card-title>
