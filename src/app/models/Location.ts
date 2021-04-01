@@ -4,4 +4,6 @@ export class Location {
     LocationName: string;
     Region: number;
     Area: number;
+    // Extras
+    PlayerName: string;
 }

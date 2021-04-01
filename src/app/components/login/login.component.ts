@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.adminSessionRecord.LoginData = "";
         this.sub2 = this.auth.AddSessionRecord(this.adminSessionRecord).subscribe((b: Result) => {
           console.log(b);
-          localStorage.setItem("sessionId", b.info);
+          localStorage.setItem("sessionId", b.value.toString());
           this.router.navigate(['overview']);
         });
       }
@@ -60,10 +60,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         console.log(this.result.info);
         this.admin = new Administrator();
       }
-    }, error => {
-      this.result.isDone = false;
-      this.result.info = "Error: " + error;
-      console.log(this.result.info);
     });
   }
 

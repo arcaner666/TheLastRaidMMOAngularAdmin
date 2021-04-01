@@ -19,19 +19,10 @@
     display: block;
 }
 
-.mat-form-field {
-    width: 50%;
+.mat-hint {
+    color: red;
 }
 
 .ml {
     margin-left: 16px;
-}
-
-.mat-raised-button {
-    margin-top: 10px;
-    width: 150px;
-}
-
-.mat-table {
-    /*width: 50%;*/
 }

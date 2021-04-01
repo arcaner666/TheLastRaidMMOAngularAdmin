@@ -1,18 +1,24 @@
 <div class="container" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="20px" fxFill>
   <mat-card class="bg-color1">
-    <mat-card-header>
-      <mat-card-title>
-
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <button mat-raised-button (click)="PreviousRegion()" [disabled]="selectedRegion < 2">Önceki</button>
-      <mat-form-field floatLabel="auto" appearance="outline">
-        <mat-label>Region</mat-label>
-        <input matInput type="region1" id="region1" name="region1" #region1="ngModel" [(ngModel)]="selectedRegion"
-          required>
-      </mat-form-field>
-      <button mat-raised-button (click)="NextRegion()" [disabled]="selectedRegion > 2">Sonraki</button>
+    <mat-card-content fxLayout="row" fxLayoutGap="20px">
+      <div fxFlex="15">
+        <button mat-raised-button (click)="PreviousRegion()" [disabled]="selectedRegion < 2" fxFill>
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </div>
+      <div fxFlex>
+        <mat-form-field floatLabel="auto" appearance="outline" fxFill>
+          <mat-label>Region</mat-label>
+          <input matInput type="region1" id="region1" name="region1" #region1="ngModel" [(ngModel)]="selectedRegion"
+            (keyup)="GetLocationsByRegion(selectedRegion)" required>
+          <mat-hint align="end" *ngIf="!result.isDone">{{result.info}}</mat-hint>
+        </mat-form-field>
+      </div>
+      <div fxFlex="15">
+        <button mat-raised-button (click)="NextRegion()" [disabled]="selectedRegion > 2" fxFill>
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </div>
     </mat-card-content>
   </mat-card>
   <mat-card class="bg-color1">
@@ -22,9 +28,9 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <mat-table [dataSource]="dataSource" matSort class="mat-table">
+      <mat-table [dataSource]="locations" class="mat-table">
         <ng-container matColumnDef="LocationId">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> LocationId </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> LocationId </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.LocationId}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="PlayerId">
@@ -40,8 +46,12 @@
           <mat-cell *matCellDef="let element"> {{element.Region}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="Area">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Area </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Area </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.Area}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="PlayerName">
+          <mat-header-cell *matHeaderCellDef> PlayerName </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.PlayerName}} </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
@@ -54,7 +64,7 @@
         <span>Harita</span>
       </mat-card-title>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content fxLayout="column" fxLayoutGap="20px">
       <br>
       <p class="ml">Girilen parametrelere göre harita üretir veya siler.</p>
       <br>

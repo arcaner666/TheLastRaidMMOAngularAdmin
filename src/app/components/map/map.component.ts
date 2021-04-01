@@ -1,10 +1,8 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MapService } from './../../services/map.service';
 import { Location } from './../../models/Location';
 import { Result } from './../../models/Result';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-map',
@@ -17,8 +15,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
   result: Result = new Result();
 
-  displayedColumns: string[] = ['LocationId', 'Region', 'Area', 'PlayerId', 'LocationName'];
-  dataSource = new MatTableDataSource<Location>();
+  displayedColumns: string[] = ['LocationId', 'Region', 'Area', 'PlayerId', 'PlayerName', 'LocationName'];
 
   region: number;
   area: number;
@@ -27,8 +24,6 @@ export class MapComponent implements OnInit, OnDestroy {
   sub1: Subscription;
   sub2: Subscription;
   sub3: Subscription;
-
-  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     public map: MapService
@@ -51,11 +46,16 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   GetLocationsByRegion(region: number) {
-    this.sub1 = this.map.GetLocationsByRegion(region).subscribe((a: Location[]) => {
-      this.locations = a;
-      this.dataSource = new MatTableDataSource<Location>(this.locations);
-      this.dataSource.sort = this.sort;
-    });
+    if (region >= 1 && region <= 3) {
+      this.sub1 = this.map.GetLocationsByRegion(region).subscribe((a: Location[]) => {
+        this.locations = a;
+      });
+      this.result.isDone = true;
+    }
+    else {
+      this.result.isDone = false;
+      this.result.info = "The region entered is invalid!";
+    }
   }
 
   CreateLocations() {
